@@ -25,14 +25,21 @@ const updateUsername = () => {
   updateElementText("#username", userName);
 };
 
-// TODO: Display description
+// Display description
 const updateDescription = () => {
-  // TODO: Call our prompt function
-  // TODO: Update element with the new text
+  // Call our prompt function
+  let description = getDescription();
+  // Update element with the new text
+  updateElementText(".description", description);
 };
 
-// TODO: Create a function that updates an element to display new text
+// Create a function that updates an element to display new text
 const updateElementText = (selector, text) => {
-  // TODO: Select the element with the given selector
-  // TODO: Update the innerText of the selected element
+  // Select the element with the given selector
+  let element = document.querySelector(selector);
+  // Update the innerText of the selected element
+  element.innerText = text;
 };
+
+updateDescription();
+updateUsername();
