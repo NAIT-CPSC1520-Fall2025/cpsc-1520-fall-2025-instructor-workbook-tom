@@ -1,22 +1,28 @@
 // this is our javascript file.
 console.log("Script loaded");
 
-// TODO: Prompt the User for their username
+// Prompt the User for their username
 const getUsername = function () {
-  // TODO: Prompt the user
-  // TODO: return the user's input
+  // Prompt the user
+  let userName = prompt("What is your username?");
+  // return the user's input
+  return userName;
 };
 
-// TODO: Prompt the User for a description
+// Prompt the User for a description
 function getDescription() {
-  // TODO: Prompt the user
-  // TODO: Return the user's input
+  // Prompt the user
+  let description = prompt("Please enter a description");
+  // Return the user's input
+  return description;
 }
 
-// TODO: Display the Username
+// Display the Username
 const updateUsername = () => {
-  // TODO: Call our prompt function
-  // TODO: Update element with the new text
+  // Call our prompt function
+  let userName = getUsername();
+  // Update element with the new text
+  updateElementText("#username", userName);
 };
 
 // TODO: Display description
