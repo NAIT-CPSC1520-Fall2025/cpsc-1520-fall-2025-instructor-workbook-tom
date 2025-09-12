@@ -20,9 +20,9 @@ function getDescription() {
 // Display the Username
 const updateUsername = () => {
   // Call our prompt function
-  let userName = getUsername();
+  let uName = getUsername();
   // Update element with the new text
-  updateElementText("#username", userName);
+  updateElementText("#username", uName);
 };
 
 // Display description
@@ -40,6 +40,15 @@ const updateElementText = (selector, text) => {
   // Update the innerText of the selected element
   element.innerText = text;
 };
+
+const greetPerson = (name, prefix) => {
+  let greeting = "Hello " + prefix + name;
+  console.log(greeting);
+};
+
+greetPerson("Jade", "Ms.");
+
+greetPerson("Mahdi", "Diamond");
 
 updateDescription();
 updateUsername();
