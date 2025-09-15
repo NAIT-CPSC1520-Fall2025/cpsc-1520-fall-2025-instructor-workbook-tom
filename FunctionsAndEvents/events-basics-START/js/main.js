@@ -26,3 +26,15 @@ document.querySelector(".link").addEventListener("click", (event) => {
 document.querySelector(".form").addEventListener("submit", (e) => {
   e.preventDefault();
 });
+
+// Select the colours element and add an event listener
+document.querySelector(".colours").addEventListener("click", (evt) => {
+  // In the event Listener
+  // Figure out which element was clicked on
+  let clickedElement = evt.target;
+  console.log(clickedElement.className);
+  // TODO: Update the background colour to be that element's className
+  //   let cssString = "background: " + clickedElement.className; // Option 1 string concatenation
+  let cssString = `background: ${clickedElement.className}`; // Option 2 string interpolation
+  document.body.style = cssString;
+});
