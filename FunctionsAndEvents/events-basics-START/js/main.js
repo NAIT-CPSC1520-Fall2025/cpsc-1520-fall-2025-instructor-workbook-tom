@@ -34,7 +34,8 @@ document.querySelector(".colours").addEventListener("click", (evt) => {
   let clickedElement = evt.target;
   console.log(clickedElement.className);
   // TODO: Update the background colour to be that element's className
-  //   let cssString = "background: " + clickedElement.className; // Option 1 string concatenation
+  // let cssString = "background: " + clickedElement.className; // Option 1 string concatenation
   let cssString = `background: ${clickedElement.className}`; // Option 2 string interpolation
+
   document.body.style = cssString;
 });
