@@ -6,13 +6,26 @@ let formElement = document.querySelector("#budget-form");
 formElement.elements[0].focus();
 
 // create an event listener on the form.
-// get the form element values for title, description and amount
-// prevent the form from being submitted.
-// get the form values.
-// add the item
-// update current budget total
-// reset the values
-// focus back at the title
+formElement.addEventListener("submit", (event) => {
+  // prevent the form from being submitted.
+  event.preventDefault();
+
+  // get the form element values for title, description and amount
+  let titleElement = formElement.elements[0];
+  let amountElement = formElement.elements.amount;
+  let descriptionElement = formElement.elements["budget-description"];
+
+  // get the form values.
+  let titleValue = titleElement.value;
+  let amountValue = amountElement.value;
+  let descriptionValue = descriptionElement.value;
+
+  // add the item
+  addBudgetLine(titleValue, amountValue, descriptionValue);
+  // update current budget total
+  // reset the values
+  // focus back at the title
+});
 
 // add a budget item create function
 /*
@@ -20,6 +33,13 @@ formElement.elements[0].focus();
     TITLE HERE (AMOUNT HERE) - DESCRIPTION HERE
 </li>
 */
+const addBudgetLine = (title, amount, description) => {
+  let newItem = `<li class="list-group-item list-group-item-action" aria-current="true">
+    ${title} (${amount}) - ${description}
+  </li>`;
+  let budgetList = document.querySelector(".current-budget");
+  budgetList.innerHTML += newItem;
+};
 
 // add a updateTotal function
 
