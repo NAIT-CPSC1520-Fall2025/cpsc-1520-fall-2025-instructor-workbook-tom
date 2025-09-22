@@ -2,6 +2,8 @@
 console.log("Javascript Online!!!!!");
 // intercept the form.
 let formElement = document.querySelector("#budget-form");
+let budgetList = document.querySelector(".current-budget");
+
 // focus to the first element
 formElement.elements[0].focus();
 
@@ -47,7 +49,6 @@ const addBudgetLine = (title, amount, description) => {
   let newItem = `<li class="list-group-item list-group-item-action" aria-current="true">
     ${title} (${amount}) - ${description}
   </li>`;
-  let budgetList = document.querySelector(".current-budget");
   budgetList.innerHTML += newItem;
 };
 
@@ -63,5 +64,11 @@ const updateTotal = (amount) => {
 };
 
 // add active class to list item on mouseover
+budgetList.addEventListener("mouseover", (event) => {
+  event.target.classList.add("active");
+});
 
 // remove active class from list item on mouseout.
+budgetList.addEventListener("mouseout", (event) => {
+  event.target.classList.remove("active");
+});
