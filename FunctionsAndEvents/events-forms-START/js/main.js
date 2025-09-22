@@ -23,6 +23,7 @@ formElement.addEventListener("submit", (event) => {
   // add the item
   addBudgetLine(titleValue, amountValue, descriptionValue);
   // update current budget total
+  updateTotal(amountValue);
   // reset the values
   // focus back at the title
 });
@@ -42,6 +43,15 @@ const addBudgetLine = (title, amount, description) => {
 };
 
 // add a updateTotal function
+const updateTotal = (amount) => {
+  // Parse the current amount from the dom
+  let budgetElement = document.querySelector("#budget-total");
+  let currentAmount = parseFloat(budgetElement.innerText);
+  // Add the amount to the current amount
+  currentAmount += parseFloat(amount);
+  // Update the dom with the new value
+  budgetElement.innerText = currentAmount;
+};
 
 // add active class to list item on mouseover
 
