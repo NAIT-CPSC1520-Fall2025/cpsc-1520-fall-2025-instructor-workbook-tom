@@ -6,14 +6,15 @@ let formElement = document.querySelector("#budget-form");
 formElement.elements[0].focus();
 
 // create an event listener on the form.
-formElement.addEventListener("submit", (event) => {
+formElement.addEventListener("submit", (e) => {
   // prevent the form from being submitted.
-  event.preventDefault();
+  e.preventDefault();
 
   // get the form element values for title, description and amount
-  let titleElement = formElement.elements[0];
+  // Can interact with the form through the selected element or the event target element
+  let titleElement = e.target.elements[0];
   let amountElement = formElement.elements.amount;
-  let descriptionElement = formElement.elements["budget-description"];
+  let descriptionElement = e.target.elements["budget-description"];
 
   // get the form values.
   let titleValue = titleElement.value;
@@ -22,10 +23,18 @@ formElement.addEventListener("submit", (event) => {
 
   // add the item
   addBudgetLine(titleValue, amountValue, descriptionValue);
+
   // update current budget total
   updateTotal(amountValue);
+
   // reset the values
+  // titleElement.value = "";
+  // amountElement.value = "";
+  // descriptionElement.value = "";
+  formElement.reset();
+
   // focus back at the title
+  formElement.elements[0].focus();
 });
 
 // add a budget item create function
