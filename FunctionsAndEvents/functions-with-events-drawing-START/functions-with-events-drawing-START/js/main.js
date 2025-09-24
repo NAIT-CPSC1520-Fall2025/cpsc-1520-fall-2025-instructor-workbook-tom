@@ -1,3 +1,5 @@
+import { moveGreenBox } from "./utilities";
+
 // this is our javascript file.
 console.log("Javascript has been linked");
 
@@ -11,13 +13,8 @@ let isMouseDown = false;
 // add an event listener to the body on the mousemove
 body.addEventListener("mousemove", (event) => {
   // Move the green box
-  // select the green-box
-  let greenBox = document.querySelector(".green-box");
-  // modify the style attributes of the green-box of the
-  greenBox.style.position = "absolute";
-  // top and left with the position of the event.
-  greenBox.style.top = `${event.y}px`;
-  greenBox.style.left = `${event.x}px`;
+  moveGreenBox(event.x, event.y);
+
   if (isMouseDown) {
     // Draw a blue box
     let newBoxTemplate = `<div class="blue-box" style="top: ${event.y}px; left: ${event.x}px"></div>`;

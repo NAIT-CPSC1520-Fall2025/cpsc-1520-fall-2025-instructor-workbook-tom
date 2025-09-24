@@ -23,6 +23,7 @@ formElement.addEventListener("submit", (e) => {
   let amountValue = amountElement.value;
   let descriptionValue = descriptionElement.value;
 
+  // TODO: Before adding a budget line item, validate each field
   // add the item
   addBudgetLine(titleValue, amountValue, descriptionValue);
 
@@ -39,12 +40,29 @@ formElement.addEventListener("submit", (e) => {
   formElement.elements[0].focus();
 });
 
-// add a budget item create function
-/*
-<li class="list-group-item list-group-item-action" aria-current="true">
-    TITLE HERE (AMOUNT HERE) - DESCRIPTION HERE
-</li>
-*/
+// Create a function that checks if text is empty
+const isTextEmpty = (value) => {
+  // Option 1
+  // if (value === "") {
+  // Option 2
+  if (value.length === 0) {
+    return true;
+  } else {
+    return false;
+  }
+  // Optimized option
+  // return value.trim() === "";
+};
+
+// Create a function that checks if number is greater than zero
+const isGreaterThanZero = (value) => {
+  if (parseFloat(value) > 0) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 const addBudgetLine = (title, amount, description) => {
   let newItem = `<li class="list-group-item list-group-item-action" aria-current="true">
     ${title} (${amount}) - ${description}
