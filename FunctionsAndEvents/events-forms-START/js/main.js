@@ -31,31 +31,64 @@ formElement.addEventListener("submit", (e) => {
   // Check the title
   let isTitleValid = !isTextEmpty(titleValue);
   if (isTitleValid) {
-    // TODO: Make sure there is no red border
+    // Make sure there is no red border
+    titleElement.classList.remove("is-invalid");
   } else {
-    // TODO: Add a red border
+    // Add a red border
+    titleElement.classList.add("is-invalid");
     // Lower our flag
     isFormValid = false;
   }
 
-  // TODO: Check the description
+  // Check the description
+  let isDescriptionValid = !isTextEmpty(descriptionValue);
+  if (isDescriptionValid) {
+    // Make sure there is no red border
+    descriptionElement.classList.remove("is-invalid");
+  } else {
+    // Add a red border
+    descriptionElement.classList.add("is-invalid");
+    // Lower our flag
+    isFormValid = false;
+  }
 
-  // TODO: Check the amount
+  // Check the amount
+  let isAmountValid = isGreaterThanZero(amountValue);
+  if (isAmountValid) {
+    // Make sure there is no red border
+    amountElement.classList.remove("is-invalid");
+  } else {
+    // Add a red border
+    amountElement.classList.add("is-invalid");
+    // Lower our flag
+    isFormValid = false;
+  }
 
-  // add the item
-  addBudgetLine(titleValue, amountValue, descriptionValue);
+  // Only do the following if form is valid
 
-  // update current budget total
-  updateTotal(amountValue);
+  // Option 1 is an early return - Don't do anymore code in this function if the form is invalid
+  // I prefer option 1
+  // if (!isFormValid) {
+  //   return;
+  // }
 
-  // reset the values
-  // titleElement.value = "";
-  // amountElement.value = "";
-  // descriptionElement.value = "";
-  formElement.reset();
+  // Option 2 is wrap the code in an if
+  if (isFormValid) {
+    // add the item
+    addBudgetLine(titleValue, amountValue, descriptionValue);
 
-  // focus back at the title
-  formElement.elements[0].focus();
+    // update current budget total
+    updateTotal(amountValue);
+
+    // reset the values
+    // titleElement.value = "";
+    // amountElement.value = "";
+    // descriptionElement.value = "";
+    formElement.reset();
+
+    // focus back at the title
+    formElement.elements[0].focus();
+  }
 });
 
 // Create a function that checks if text is empty
