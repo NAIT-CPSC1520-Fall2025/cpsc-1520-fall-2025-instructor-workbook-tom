@@ -24,6 +24,24 @@ formElement.addEventListener("submit", (e) => {
   let descriptionValue = descriptionElement.value;
 
   // TODO: Before adding a budget line item, validate each field
+  // Use a flag to track the state of the form (used for submitting not for visuals)
+  // Start by assuming the form is valid, adjust assumption if you find one invalid field
+  let isFormValid = true;
+
+  // Check the title
+  let isTitleValid = !isTextEmpty(titleValue);
+  if (isTitleValid) {
+    // TODO: Make sure there is no red border
+  } else {
+    // TODO: Add a red border
+    // Lower our flag
+    isFormValid = false;
+  }
+
+  // TODO: Check the description
+
+  // TODO: Check the amount
+
   // add the item
   addBudgetLine(titleValue, amountValue, descriptionValue);
 
