@@ -96,7 +96,7 @@ const isTextEmpty = (value) => {
   // Option 1
   // if (value === "") {
   // Option 2
-  if (value.length === 0) {
+  if (value.trim().length === 0) {
     return true;
   } else {
     return false;
@@ -141,3 +141,9 @@ budgetList.addEventListener("mouseover", (event) => {
 budgetList.addEventListener("mouseout", (event) => {
   event.target.classList.remove("active");
 });
+
+// TASK LIST:
+// 1. Modify the checks to add the is-valid class when fields are valid
+// 2. Remove the validation check classes from the form elements on submit (reset it to its base value)
+// 3. Add a function that checks if text is at least 10 characters
+// 4. Use the previous function for validating description
