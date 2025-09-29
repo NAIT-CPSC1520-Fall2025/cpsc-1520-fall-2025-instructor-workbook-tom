@@ -33,20 +33,24 @@ formElement.addEventListener("submit", (e) => {
   if (isTitleValid) {
     // Make sure there is no red border
     titleElement.classList.remove("is-invalid");
+    titleElement.classList.add("is-valid");
   } else {
     // Add a red border
+    titleElement.classList.remove("is-valid");
     titleElement.classList.add("is-invalid");
     // Lower our flag
     isFormValid = false;
   }
 
   // Check the description
-  let isDescriptionValid = !isTextEmpty(descriptionValue);
+  let isDescriptionValid = isStringLengthGreaterThanTen(descriptionValue);
   if (isDescriptionValid) {
     // Make sure there is no red border
+    descriptionElement.classList.add("is-valid");
     descriptionElement.classList.remove("is-invalid");
   } else {
     // Add a red border
+    descriptionElement.classList.remove("is-valid");
     descriptionElement.classList.add("is-invalid");
     // Lower our flag
     isFormValid = false;
@@ -56,9 +60,11 @@ formElement.addEventListener("submit", (e) => {
   let isAmountValid = isGreaterThanZero(amountValue);
   if (isAmountValid) {
     // Make sure there is no red border
+    amountElement.classList.add("is-valid");
     amountElement.classList.remove("is-invalid");
   } else {
     // Add a red border
+    amountElement.classList.remove("is-valid");
     amountElement.classList.add("is-invalid");
     // Lower our flag
     isFormValid = false;
@@ -86,6 +92,11 @@ formElement.addEventListener("submit", (e) => {
     // descriptionElement.value = "";
     formElement.reset();
 
+    // Reset the valid classes
+    amountElement.classList.remove("is-valid");
+    descriptionElement.classList.remove("is-valid");
+    titleElement.classList.remove("is-valid");
+
     // focus back at the title
     formElement.elements[0].focus();
   }
@@ -103,6 +114,10 @@ const isTextEmpty = (value) => {
   }
   // Optimized option
   // return value.trim() === "";
+};
+
+const isStringLengthGreaterThanTen = (value) => {
+  return value.trim().length > 10;
 };
 
 // Create a function that checks if number is greater than zero
