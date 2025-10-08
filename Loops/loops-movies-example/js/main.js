@@ -35,10 +35,7 @@ const filterItems = (filterValue) => {
   console.log("this was filtered with: " + filterValue);
 
   let allMovieElements = document.querySelectorAll(".top-movies-list li");
-  let i = 0;
-  while (i < allMovieElements.length) {
-    // Get the indexed movie element
-    let movieElement = allMovieElements[i];
+  allMovieElements.forEach((movieElement) => {
     // check if the innerText of that element .includes() the filter
     if (
       movieElement.innerText.toLowerCase().includes(filterValue.toLowerCase())
@@ -49,8 +46,23 @@ const filterItems = (filterValue) => {
       // else add .hidden-item
       movieElement.classList.add("hidden-item");
     }
-    i++;
-  }
+  });
+  //   let i = 0;
+  //   while (i < allMovieElements.length) {
+  //     // Get the indexed movie element
+  //     let movieElement = allMovieElements[i];
+  //     // check if the innerText of that element .includes() the filter
+  //     if (
+  //       movieElement.innerText.toLowerCase().includes(filterValue.toLowerCase())
+  //     ) {
+  //       // if it does remove .hidden-item
+  //       movieElement.classList.remove("hidden-item");
+  //     } else {
+  //       // else add .hidden-item
+  //       movieElement.classList.add("hidden-item");
+  //     }
+  //     i++;
+  //   }
 };
 
 // let allMovieElements = document.querySelectorAll(".top-movies-list li");
