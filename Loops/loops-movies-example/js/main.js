@@ -35,7 +35,8 @@ const filterItems = (filterValue) => {
   console.log("this was filtered with: " + filterValue);
 
   let allMovieElements = document.querySelectorAll(".top-movies-list li");
-  for (let i = 0; i < allMovieElements.length; i++) {
+  let i = 0;
+  while (i < allMovieElements.length) {
     // Get the indexed movie element
     let movieElement = allMovieElements[i];
     // check if the innerText of that element .includes() the filter
@@ -48,5 +49,42 @@ const filterItems = (filterValue) => {
       // else add .hidden-item
       movieElement.classList.add("hidden-item");
     }
+    i++;
   }
 };
+
+// let allMovieElements = document.querySelectorAll(".top-movies-list li");
+
+// for (let i = 0; i < allMovieElements.length; i++) {
+//   const movie = allMovieElements[i];
+//   console.log(movie.innerText);
+// }
+
+// allMovieElements.forEach((movie) => {
+//   console.log(movie.innerText);
+// });
+
+// let lowerCaseTitles = allMovieElements.map((movie) => {
+//   return movie.innerText.toLowerCase();
+// });
+
+// let filteredMovies = allMovieElements.filter((movie) => {
+//   return movie.innerText.includes("God");
+// });
+
+// let grades = [0, 100, 32, 98, 74, 12, 46, 86, 58, 77];
+
+// let classAverage = grades.reduce((avg, grade) => {
+//   return avg + grade / grades.length;
+// });
+
+// let avg = 0;
+// for (let i = 0; i < grades.length; i++) {
+//   const grade = grades[i];
+//   avg = avg + grade / grades.length;
+// }
+
+// let averg = 0;
+// grades.forEach((grade) => {
+//   averg = averg + grade / grades.length;
+// });
