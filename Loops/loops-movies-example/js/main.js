@@ -39,7 +39,14 @@ const filterItems = (filterValue) => {
     // Get the indexed movie element
     let movieElement = allMovieElements[i];
     // check if the innerText of that element .includes() the filter
-    // if it does remove .hidden-item
-    // else add .hidden-item
+    if (
+      movieElement.innerText.toLowerCase().includes(filterValue.toLowerCase())
+    ) {
+      // if it does remove .hidden-item
+      movieElement.classList.remove("hidden-item");
+    } else {
+      // else add .hidden-item
+      movieElement.classList.add("hidden-item");
+    }
   }
 };
