@@ -1,4 +1,4 @@
-/* our custom CSS file*/ 
+/* our custom CSS file*/
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;
@@ -27,12 +27,12 @@
 }
 
 .wordle {
-  margin-left:20%;
-  margin-right:20%;
+  margin-left: 20%;
+  margin-right: 20%;
 }
 
 .guesses {
-  padding-top: 15px
+  padding-top: 15px;
 }
 
 .correct-letter-placement {
@@ -40,9 +40,9 @@
 }
 
 .incorrect-letter-placement {
-  background-color: #a3a328
+  background-color: #a3a328;
 }
 
 .hidden {
-  display: none
+  display: none;
 }

@@ -26,11 +26,13 @@ We're going to build wordle without the keyboard.
 */
 console.log("loaded");
 
+let solutionWord = "clean";
 let guesses = [];
 let wordleForm = document.querySelector("#wordle-form");
 
 wordleForm.addEventListener("submit", (event) => {
   event.preventDefault();
+  console.log(event.submitter);
 
   let guessElement = event.target.elements["guess"];
   let guessValue = guessElement.value;
@@ -44,6 +46,8 @@ wordleForm.addEventListener("submit", (event) => {
 
   // The following will only execute if the guess is 5 chars
   addGuess(guessValue);
+  wordleForm.reset();
+  checkIfCorrect();
 });
 
 const addGuess = (guess) => {
@@ -60,7 +64,45 @@ const showGuessOnPage = () => {
   // Then render out the letters
   let selector = `.guess-${lastIndex} .guess-character`;
   let characterBoxes = document.querySelectorAll(selector);
-  console.log(characterBoxes);
+  // Go through each box
+  characterBoxes.forEach((element, index) => {
+    // put in the corresponding letter
+    element.innerText = lastGuess[index];
+    if (isCharacterInCorrectPlace(lastGuess, index)) {
+      // check if the letter is correct in position and inclusion -> make box green
+      element.classList.add("correct-letter-placement");
+    } else if (isCharacterInWord(lastGuess, index)) {
+      // check if the letter is correct in inclusion only -> make box yellow
+      element.classList.add("incorrect-letter-placement");
+    }
+  });
+  //   for (let index = 0; index < characterBoxes.length; index++) {
+  //     const element = characterBoxes[index];
+  //     element.innerText = lastGuess[index];
+  //   }
+};
+
+// Guess is the full word, index is the index of the character in that word we are checking
+const isCharacterInWord = (guess, index) => {
+  if (solutionWord.toLowerCase().includes(guess.toLowerCase()[index])) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+const isCharacterInCorrectPlace = (guess, index) => {
+  if (solutionWord[index].toLowerCase() === guess[index].toLowerCase()) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+const checkIfCorrect = () => {
+  if (guesses.includes(solutionWord)) {
+    document.querySelector(".wordle-success").classList.remove("hidden");
+  }
 };
 
 const isTextFiveChars = (text) => {
