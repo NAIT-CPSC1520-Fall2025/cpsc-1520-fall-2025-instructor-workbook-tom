@@ -29,6 +29,8 @@ console.log("loaded");
 let solutionWord = "clean";
 let guesses = [];
 let wordleForm = document.querySelector("#wordle-form");
+let wordleContainer = document.querySelector(".guesses-container");
+let allGuessElements = document.querySelectorAll(".guesses");
 
 wordleForm.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -49,6 +51,33 @@ wordleForm.addEventListener("submit", (event) => {
   wordleForm.reset();
   checkIfCorrect();
 });
+
+wordleContainer.addEventListener("click", (event) => {
+  // If we clicked on an element that is not one of the guesses
+  // just end the function here
+  if (!isGuessElement(event.target)) {
+    return;
+  }
+  let clickedGuessElement = event.target;
+
+  let allGuessElementsArray = Array.from(allGuessElements);
+
+  let indexToDelete = allGuessElementsArray.indexOf(clickedGuessElement);
+
+  // Once we have the index of the guess to delete we'll pass that into a function that deletes it
+  removeGuess(indexToDelete);
+});
+
+const isGuessElement = (element) => {
+  return element.classList.contains("guesses");
+};
+
+const removeGuess = (guessToRemoveIndex) => {
+  // Remove guess from data structure
+  guesses.splice(guessToRemoveIndex, 1); // First give it the index to start at, then the number of elements to delete
+  console.log(guesses);
+  // TODO: Redraw the visuals
+};
 
 const addGuess = (guess) => {
   guesses.push(guess);
