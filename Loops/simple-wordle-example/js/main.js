@@ -134,10 +134,6 @@ const showGuess = (guessIndex) => {
       element.classList.add("incorrect-letter-placement");
     }
   });
-  //   for (let index = 0; index < characterBoxes.length; index++) {
-  //     const element = characterBoxes[index];
-  //     element.innerText = lastGuess[index];
-  //   }
 };
 
 // Guess is the full word, index is the index of the character in that word we are checking
