@@ -76,31 +76,60 @@ const removeGuess = (guessToRemoveIndex) => {
   // Remove guess from data structure
   guesses.splice(guessToRemoveIndex, 1); // First give it the index to start at, then the number of elements to delete
   console.log(guesses);
-  // TODO: Redraw the visuals
+  // Redraw the visuals
+  renderGuesses();
 };
 
 const addGuess = (guess) => {
   guesses.push(guess);
-  showGuessOnPage();
+
+  // Instead of showing the last guess, rerender all the guesses
+  // showGuess();
+  renderGuesses();
 };
 
-const showGuessOnPage = () => {
+const renderGuesses = () => {
+  // First reset all the guess elements
+  resetAllGuessElements();
+  // Then call showGuess for each guess in the guesses array
+  for (let i = 0; i < guesses.length; i++) {
+    showGuess(i);
+  }
+};
+
+const resetAllGuessElements = () => {
+  // For each guess element, replace the innerHTML with the blank template
+  let templateHTML = `
+    <div class=" guess-character"></div>
+    <div class=" guess-character"></div>
+    <div class=" guess-character"></div>
+    <div class=" guess-character"></div>
+    <div class=" guess-character"></div>
+    delete
+  `;
+
+  allGuessElements.forEach((element) => {
+    element.innerHTML = templateHTML;
+  });
+};
+
+// TODO: Refactor this from always showing the last guess, to now showing the guess at a given index
+const showGuess = (guessIndex) => {
   // Get the last guess
-  let lastIndex = guesses.length - 1;
-  let lastGuess = guesses[lastIndex];
-  console.log(lastGuess);
+  let guess = guesses[guessIndex];
+  console.log(guess);
 
   // Then render out the letters
-  let selector = `.guess-${lastIndex} .guess-character`;
+  let selector = `.guess-${guessIndex} .guess-character`;
   let characterBoxes = document.querySelectorAll(selector);
   // Go through each box
   characterBoxes.forEach((element, index) => {
     // put in the corresponding letter
-    element.innerText = lastGuess[index];
-    if (isCharacterInCorrectPlace(lastGuess, index)) {
+    element.innerText = guess[index];
+    if (isCharacterInCorrectPlace(guess, index)) {
       // check if the letter is correct in position and inclusion -> make box green
       element.classList.add("correct-letter-placement");
-    } else if (isCharacterInWord(lastGuess, index)) {
+    } else if (isCharacterInWord(guess, index)) {
       // check if the letter is correct in inclusion only -> make box yellow
       element.classList.add("incorrect-letter-placement");
     }
