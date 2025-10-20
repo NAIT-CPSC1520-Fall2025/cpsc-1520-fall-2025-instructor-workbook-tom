@@ -26,7 +26,17 @@ We're going to build wordle without the keyboard.
 */
 console.log("loaded");
 
-let solutionWord = "clean";
+let possibleWords = ["hello", "clean", "chore", "tears", "spoon"];
+
+let solutionWord =
+  possibleWords[Math.floor(Math.random() * possibleWords.length)];
+
+// TODO: Create an array of valid words
+// TODO: Randomly select the solution word to use from that array
+// TODO: Add validation to the guess before allowing it to go through
+//       It must be a word in the list of valid words
+// HINT: Math.floor(Math.random() * length of array) - will give you an index between 0 and the length of the array
+
 let guesses = [];
 let wordleForm = document.querySelector("#wordle-form");
 let wordleContainer = document.querySelector(".guesses-container");
@@ -39,7 +49,7 @@ wordleForm.addEventListener("submit", (event) => {
   let guessElement = event.target.elements["guess"];
   let guessValue = guessElement.value;
 
-  if (isTextFiveChars(guessValue)) {
+  if (isTextFiveChars(guessValue) && isGuessInPossibleWords(guessValue)) {
     guessElement.classList.remove("is-invalid");
   } else {
     guessElement.classList.add("is-invalid");
@@ -166,4 +176,26 @@ const isTextFiveChars = (text) => {
   //     return false;
   //   }
   return text.length === 5;
+};
+
+const isGuessInPossibleWords = (text) => {
+  // Option 1
+  // for (let i = 0; i < possibleWords.length; i++) {
+  //   possibleWord = possibleWords[i];
+  //   if (possibleWord === text) {
+  //     return true;
+  //   }
+  // }
+  // return false;
+
+  // Option 2
+  // possibleWords.forEach((word) => {
+  //   if (word === text) {
+  //     return true;
+  //   }
+  // });
+  // return false;
+
+  // Option 3
+  return possibleWords.includes(text);
 };
