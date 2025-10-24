@@ -34,18 +34,31 @@ const calculateCompleteCount = () => {
   // Checks all todos and calculates the percentage complete
   // Then updates the HTML to display that count
 
-  let numberOfCompleteTodos = todos.reduce((previousValue, currentTodo) => {
-    console.log(previousValue);
-    console.log(currentTodo);
+  // Option 1: Reduce
+  // let numberOfCompleteTodos = todos.reduce((previousValue, currentTodo) => {
+  //   console.log(previousValue);
+  //   console.log(currentTodo);
 
-    // If the todo is complete add 1 to the count of complete todos
-    if (currentTodo.complete) {
-      previousValue += 1;
+  //   // If the todo is complete add 1 to the count of complete todos
+  //   if (currentTodo.complete) {
+  //     previousValue += 1;
+  //   }
+  //   return previousValue;
+  // }, 0);
+
+  // Option 2: Loop
+  let numberOfCompleteTodos = 0;
+  todos.forEach((todo) => {
+    if (todo.complete) {
+      numberOfCompleteTodos += 1;
     }
-    return previousValue;
-  }, 0);
+  });
 
-  // TODO: Display this in the HTML as a percentage
+  // Display this in the HTML as a percentage
+  let completeCountElement = document.querySelector("#todo-complete-count");
+  completeCountElement.innerHTML = `${
+    (numberOfCompleteTodos / todos.length) * 100
+  }%`;
 };
 
 todoForm.addEventListener("submit", (event) => {
@@ -56,16 +69,26 @@ todoForm.addEventListener("submit", (event) => {
   // Create a new todo object and add it to the todos array
   let newTodo = {
     description: todoDescription,
-    completed: false,
+    complete: false,
   };
 
   todos.push(newTodo);
 
-  console.log(todos);
   renderTodos();
 });
 
-// TODO: Add functionality to allow checking off todos
+// Add functionality to allow checking off todos
+let todoListElement = document.querySelector(".todo-list");
+todoListElement.addEventListener("change", (event) => {
+  let todoCheckbox = event.target;
+
+  let todoIndex = todoCheckbox.getAttribute("data-todo-id");
+
+  // Update the data to match the visuals by toggling the complete property
+  todos[todoIndex].complete = !todos[todoIndex].complete;
+
+  calculateCompleteCount();
+});
 
 const renderTodos = () => {
   // This function redraws the todolist to match the data structure
