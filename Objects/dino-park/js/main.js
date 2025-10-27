@@ -1,5 +1,5 @@
 // TODO Step 1: create an array that represents our dino objects
-let dinos = [];
+let dinos = []; // STATE
 
 // TODO Step 2: create HTML element variable for the table body
 
@@ -44,6 +44,26 @@ const renderTable = () => {
 //     <td class="remove" data-dino-id="INSERT NUMBER">REMOVE</td>
 //   </tr>
 
+// OPTION 1
+const dinoFoodType = (dino) => {
+  // if herbivore -> "herbivore"
+  // if carnivore -> "carnivore"
+  // if both -> "omnivore"
+};
+
+// OPTION 2
+const isHerbivore = (dino) => {
+  // return true if herbivore else false
+};
+
+const isCarnivore = (dino) => {
+  // return true if carnivore else false
+};
+
+const isOmnivore = (dino) => {
+  // return true if omnivore else false
+};
+
 // TO DO Step 5: create a no-param function called renderStats()
 const renderStats = () => {
   // Option A - Do all calculations here
@@ -83,7 +103,7 @@ document.querySelector("#input-form").addEventListener("submit", (event) => {
     isPlantEater: eatsPlants,
   };
 
-  dinos.push(dino);
+  dinos.push(dino); // Update the state
 
   renderTable();
 
