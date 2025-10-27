@@ -88,12 +88,34 @@ const dinoFoodType = (dino) => {
 // TO DO Step 5: create a no-param function called renderStats()
 const renderStats = () => {
   // Option A - Do all calculations here
-  // TODO: Create counters for each
-  // TODO: Loop through all the dinosaurs
-  // TODO: For each check diet type - increment given counter
-  // TODO: For each add age to total age
-  // TODO: After loop - update total dinos, compute avg age
-  // TODO: Set the respective elements innerText to match values
+  // Create counters for each
+  let numCarnivores = 0;
+  let numOmnivores = 0;
+  let numHerbivores = 0;
+  let avgAge = 0;
+  // Loop through all the dinosaurs
+  dinos.forEach((dino) => {
+    // For each check diet type - increment given counter
+    if (dinoFoodType(dino) === "omnivore") {
+      numOmnivores += 1;
+    } else if (dinoFoodType(dino) === "herbivore") {
+      numHerbivores += 1;
+    } else if (dinoFoodType(dino) === "carnivore") {
+      numCarnivores += 1;
+    }
+    // For each add age to total age
+    avgAge += new Date().getFullYear() - dino.birthYear;
+  });
+  // After loop - update total dinos, compute avg age
+  // avgAge /= dinos.length;
+  avgAge = avgAge / dinos.length;
+  // Set the respective elements innerText to match values
+  document.querySelector("#avg-age").innerText = avgAge;
+  document.querySelector("#num-dinos").innerText = dinos.length;
+  document.querySelector("#num-herbivores").innerText = numHerbivores;
+  document.querySelector("#num-carnivores").innerText = numCarnivores;
+  document.querySelector("#num-omnivores").innerText = numOmnivores;
+
   // Option B - Split each calculation into its own function
   // TODO: Calculate each diet type count in a reduce function (or loop)
   // TODO: Calculate average age in reduce function (or loop)
