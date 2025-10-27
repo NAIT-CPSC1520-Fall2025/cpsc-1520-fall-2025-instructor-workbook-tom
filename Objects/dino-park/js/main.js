@@ -28,11 +28,24 @@ dinoBreeds.forEach((dinoBreed) => {
 
 // TO DO Step 4: create a no-param function called renderTable()
 const renderTable = () => {
-  // TODO: Make a function for diet (carnivore, herbivore, omnivore)
-  // TODO: Reset the dinos table (visuals)
-  // TODO: Loop through dinos array
-  // TODO: For each dino - assign values to template HTML
-  // TODO: Append the template HTML to the page
+  // Reset the dinos table (visuals)
+  tableBodyElement.innerHTML = "";
+  // Loop through dinos array
+  dinos.forEach((dino) => {
+    // For each dino - assign values to template HTML
+    // currentYear - birthYear : new Date().getFullYear() - dino.birthYear
+    let tableRow = `
+      <tr>
+        <td>${dino.name}</td>
+        <td>${dino.species}</td>
+        <td>${new Date().getFullYear() - dino.birthYear}</td>
+        <td>${dinoFoodType(dino)}</td>
+        <td class="remove" data-dino-id="INSERT NUMBER">REMOVE</td>
+      </tr>
+    `;
+    //Append the template HTML to the page
+    tableBodyElement.innerHTML += tableRow;
+  });
 };
 
 // HTML syntax:
@@ -46,23 +59,31 @@ const renderTable = () => {
 
 // OPTION 1
 const dinoFoodType = (dino) => {
-  // if herbivore -> "herbivore"
-  // if carnivore -> "carnivore"
-  // if both -> "omnivore"
+  // A single dino is passed in and its diet is returned
+
+  if (dino.isPlantEater && dino.isMeatEater) {
+    return "omnivore";
+  }
+  if (dino.isMeatEater) {
+    return "carnivore";
+  }
+  if (dino.isPlantEater) {
+    return "herbivore";
+  }
 };
 
 // OPTION 2
-const isHerbivore = (dino) => {
-  // return true if herbivore else false
-};
+// const isHerbivore = (dino) => {
+//   return dino.isPlantEater;
+// };
 
-const isCarnivore = (dino) => {
-  // return true if carnivore else false
-};
+// const isCarnivore = (dino) => {
+//   return dino.isMeatEater;
+// };
 
-const isOmnivore = (dino) => {
-  // return true if omnivore else false
-};
+// const isOmnivore = (dino) => {
+//   return dino.isMeatEater && dino.isPlantEater;
+// };
 
 // TO DO Step 5: create a no-param function called renderStats()
 const renderStats = () => {
@@ -105,6 +126,9 @@ document.querySelector("#input-form").addEventListener("submit", (event) => {
 
   dinos.push(dino); // Update the state
 
+  console.log(dinoFoodType(dino));
+
+  // Redraw the page
   renderTable();
 
   renderStats();
