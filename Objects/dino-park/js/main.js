@@ -14,7 +14,7 @@ const dinoBreeds = [
   "Apatosaurus",
   "Iguanodon",
   "Deinonychus",
-].sort();
+];
 
 // TO DO Step 3: populate the drop down list of breeds
 let dinoBreedsDropdown = document.querySelector("#dino-species");
@@ -175,3 +175,54 @@ document.querySelector(".stats-section p.temp").classList.add("hide");
 // this function will read in the json file from the data folder, parse its contents, then populate the dinos array asynchronously
 // finally, it will call the appropriate functions to render the content on the page
 // this function should be called once when the page is initially loaded
+
+// PROMISE SYNTAX
+// const getDinosFromFile = () => {
+//   // Fetch the dino file
+//   fetch("data/dinos.json")
+//     .then((response) => {
+//       // Then load the json from the file
+//       console.log(response.status);
+//       console.log(response);
+//       return response.json();
+//     })
+//     .then((data) => {
+//       // Then use the data in our website
+//       console.log(data);
+
+//       // Update the state
+//       dinos = data;
+
+//       // redraw to match
+//       renderTable();
+//       renderStats();
+//     });
+
+//   // fetch(url).then((response) => {return response.json()}).then((data) => {...use the data in some way});
+// };
+
+const getDinosFromFile = async () => {
+  // Fetch the dino file
+  let response = await fetch("data/dinos.json");
+  // Then load the json from the file
+  let data = await response.json();
+
+  console.log(data);
+  // Then use the data in our website
+  dinos = data;
+
+  dinos.sort((a, b) => {
+    if (dinoBreeds.indexOf(a.species) < dinoBreeds.indexOf(b.species)) {
+      return -1;
+    } else if (dinoBreeds.indexOf(a.species) > dinoBreeds.indexOf(b.species)) {
+      return 1;
+    } else {
+      return a.name.localeCompare(b.name);
+    }
+  });
+  // redraw to match
+  renderTable();
+  renderStats();
+};
+
+getDinosFromFile();
