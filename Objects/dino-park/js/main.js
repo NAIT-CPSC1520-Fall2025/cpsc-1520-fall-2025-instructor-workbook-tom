@@ -220,6 +220,27 @@ const getDinosFromFile = async () => {
       return a.name.localeCompare(b.name);
     }
   });
+
+  // Mapping objects to values
+  let dinoYears = dinos.map((dino) => {
+    return dino.birthYear;
+  });
+
+  // Sorting array by default
+  dinoYears.sort();
+  console.log(dinoYears);
+
+  // Remove duplicates with filter
+  let uniqueYears = dinoYears.filter((year, index) => {
+    return dinoYears.indexOf(year) === index;
+  });
+  console.log(uniqueYears);
+
+  dinos = dinos.filter((dino) => {
+    // filter has to return either true or false
+    // true to keep, false to reject
+    return dino.birthYear <= 1990 && dino.species === "Velociraptor";
+  });
   // redraw to match
   renderTable();
   renderStats();
