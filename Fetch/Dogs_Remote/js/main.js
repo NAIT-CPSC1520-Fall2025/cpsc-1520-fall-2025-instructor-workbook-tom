@@ -42,15 +42,15 @@ const getRandomDog = async () => {
   return url;
 };
 
-const getRandomDogPromise = () => {
-  return fetch("https://dog.ceo/api/breeds/image/random")
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      return data.message;
-    });
-};
+// const getRandomDogPromise = () => {
+//   return fetch("https://dog.ceo/api/breeds/image/random")
+//     .then((response) => {
+//       return response.json();
+//     })
+//     .then((data) => {
+//       return data.message;
+//     });
+// };
 
 const displayDogImage = (imageUrl) => {
   // Select the image element
@@ -59,3 +59,5 @@ const displayDogImage = (imageUrl) => {
   // Set the src attribute to the imageURL
   dogImageEl.setAttribute("src", imageUrl);
 };
+
+getRandomDog().then((url) => displayDogImage(url));
