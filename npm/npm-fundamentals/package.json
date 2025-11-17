@@ -1,0 +1,18 @@
+{
+  "name": "npm-fundamentals",
+  "version": "1.0.0",
+  "description": "NPM essentially allows us to use the wonderful world of open source to create awesome packages.",
+  "main": "index.js",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "vite": "^7.2.2"
+  }
+}
