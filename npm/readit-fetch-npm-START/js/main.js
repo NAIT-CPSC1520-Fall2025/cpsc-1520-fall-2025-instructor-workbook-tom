@@ -44,16 +44,19 @@ readitForm.addEventListener("submit", (event) => {
   let url = form.elements["item-url"];
   console.log(title.value);
   console.log(url.value);
-  addReaditItem(title.value, url.value);
+  addPost(title.value, url.value).then((post) => {
+    addReaditItem(post.title, post.url, post.score, post.id);
+  });
   // reset elements
   title.value = "";
   url.value = "";
 });
 
-const addReaditItem = (title, url) => {
+const addReaditItem = (title, url, scoreVal, id) => {
   // create the card
   let card = document.createElement("div");
   card.classList.add("card", "mt-2"); // adds both classes
+  card.setAttribute("post-id", id);
   //create card body
   let cardBody = document.createElement("div");
   cardBody.classList.add("card-body", "d-flex", "flex-row");
@@ -64,7 +67,7 @@ const addReaditItem = (title, url) => {
   // create score
   let score = document.createElement("p");
   score.classList.add("score", "h4", "m-2");
-  score.textContent = "0";
+  score.textContent = scoreVal;
   // create down button
   let downButton = document.createElement("button");
   downButton.classList.add("btn", "vote-down", "m-1", "btn-secondary");
@@ -115,7 +118,10 @@ const voteDown = (buttonElement) => {
 
 const changeScore = (scoreElement, value) => {
   let currentScore = parseInt(scoreElement.textContent);
-  scoreElement.textContent = currentScore + value;
+  let id = scoreElement.parentNode.parentNode.getAttribute("post-id");
+  let newScore = currentScore + value;
+  scoreElement.textContent = newScore;
+  updateScore(id, newScore);
 };
 
 const changeItemOrder = (cardBodyElement) => {
@@ -173,6 +179,6 @@ const downAnimation = (element) => {
 
 getAllPosts().then((posts) => {
   posts.forEach((post) => {
-    addReaditItem(post.title, post.url); // TODO: update this to store the id and score
+    addReaditItem(post.title, post.url, post.score, post.id); // TODO: update this to store the id and score
   });
 });
