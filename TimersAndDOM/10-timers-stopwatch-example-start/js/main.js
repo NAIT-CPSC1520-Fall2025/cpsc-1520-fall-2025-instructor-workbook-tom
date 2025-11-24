@@ -33,9 +33,21 @@ let currentTime = 0; // Tracks multiples of time delay
 let timerInterval = null;
 let isStopWatchRunning = false;
 
+// Lapping variables
+let currentLap = 1;
+let lastLapTime = 0;
+
 startButton.addEventListener("click", () => {
   // if the stop watch is not running, start it
-  startTimer();
+  if (!isStopWatchRunning) {
+    startTimer();
+  }
+});
+
+stopButton.addEventListener("click", () => {
+  if (isStopWatchRunning) {
+    stopTimer();
+  }
 });
 
 const startTimer = () => {
@@ -50,6 +62,11 @@ const startTimer = () => {
     // Then display the new time
     setTimerValue();
   }, TIME_DELAY);
+};
+
+const stopTimer = () => {
+  clearInterval(timerInterval);
+  isStopWatchRunning = false;
 };
 
 const setTimerValue = () => {
