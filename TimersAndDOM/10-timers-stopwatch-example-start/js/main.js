@@ -35,7 +35,7 @@ let isStopWatchRunning = false;
 
 // Lapping variables
 let currentLap = 1;
-let lastLapTime = 0;
+let lastLapTime = 0; // Tracks the end time of the last completed lap
 
 startButton.addEventListener("click", () => {
   // if the stop watch is not running, start it
@@ -48,6 +48,10 @@ stopButton.addEventListener("click", () => {
   if (isStopWatchRunning) {
     stopTimer();
   }
+});
+
+lapButton.addEventListener("click", () => {
+  addLap();
 });
 
 const startTimer = () => {
@@ -67,6 +71,20 @@ const startTimer = () => {
 const stopTimer = () => {
   clearInterval(timerInterval);
   isStopWatchRunning = false;
+};
+
+const addLap = () => {
+  // Calculate the lap time
+  let lapTime = currentTime - lastLapTime;
+
+  // Update the laps list
+  lapsList.innerHTML += `<li class="list-group-item">Lap ${currentLap} - ${getReadableTime(
+    lapTime
+  )}</li>`;
+
+  // Update our tracking values
+  currentLap += 1;
+  lastLapTime = currentTime;
 };
 
 const setTimerValue = () => {
