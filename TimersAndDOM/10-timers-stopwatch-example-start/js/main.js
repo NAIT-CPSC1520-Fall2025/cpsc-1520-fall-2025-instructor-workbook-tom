@@ -78,9 +78,18 @@ const addLap = () => {
   let lapTime = currentTime - lastLapTime;
 
   // Update the laps list
-  lapsList.innerHTML += `<li class="list-group-item">Lap ${currentLap} - ${getReadableTime(
-    lapTime
-  )}</li>`;
+  // Replace the following using the DOM API
+  // lapsList.innerHTML += `<li class="list-group-item">Lap ${currentLap} - ${getReadableTime(
+  //   lapTime
+  // )}</li>`;
+  let lapItem = document.createElement("li");
+  lapItem.classList.add("list-group-item");
+  let lapText = document.createTextNode(
+    `Lap ${currentLap} - ${getReadableTime(lapTime)}`
+  );
+
+  lapItem.appendChild(lapText);
+  lapsList.appendChild(lapItem);
 
   // Update our tracking values
   currentLap += 1;
