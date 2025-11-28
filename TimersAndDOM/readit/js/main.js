@@ -130,6 +130,8 @@ const voteUp = (buttonElement) => {
 
   // Change the score
   changeScore(scoreElement, 1);
+
+  changeItemOrder(cardBody);
 };
 
 const voteDown = (buttonElement) => {
@@ -142,9 +144,45 @@ const voteDown = (buttonElement) => {
 
   // Change the score
   changeScore(scoreElement, -1);
+
+  changeItemOrder(cardBody);
 };
 
 const changeScore = (scoreEl, difference) => {
   let currScore = parseInt(scoreEl.textContent);
   scoreEl.textContent = currScore + difference;
+};
+
+const changeItemOrder = (cardBodyEl) => {
+  // Get the card element
+  let cardEl = cardBodyEl.parentNode;
+  // Look at the neighbouring cards
+  let upperCardNeighbour = cardEl.previousElementSibling;
+  let lowerCardNeighbour = cardEl.nextElementSibling;
+  // Decide if it should swap with them
+  if (upperCardNeighbour) {
+    swapItemsIfNecessary(upperCardNeighbour, cardEl);
+  }
+  // If it should swap, do the swap
+  if (lowerCardNeighbour) {
+    swapItemsIfNecessary(cardEl, lowerCardNeighbour);
+  }
+};
+
+const swapItemsIfNecessary = (topCardEl, bottomCardEl) => {
+  // Get the two element scores
+  let topScoreElement = topCardEl.children[0].children[1];
+  let bottomScoreElement = bottomCardEl.children[0].children[1];
+
+  // If the bottom element is greater, swap the elements
+  if (
+    parseInt(bottomScoreElement.textContent) >
+    parseInt(topScoreElement.textContent)
+  ) {
+    // technically this is the same as allItems
+    let cardListElement = topCardEl.parentNode;
+
+    cardListElement.insertBefore(bottomCardEl, topCardEl);
+  }
+  // If less than or equal do nothing
 };
