@@ -26,13 +26,13 @@ Ranking Piece
 1. Select the All of the Items.
 2. Add an Event listener on the readit-items list.
 3. check if the event.target has the vote-up class or the vote-down class
-4. Create the vote up and functions (they'll be similar)
+4. Create the vote up and vote down functions (they'll be similar)
     - get the element with the class card body (the parent of the button)
     using the parentNode (this is called traversing the tree)
     - get the score element by traversing the tree downward using the 
     children list (you have a list of children)
     - create a function (changeScore) to increment the "textContent" of the score element
-    by either adding one or 
+    by either adding one or subtracting one
 5. create a function "changeItemOrder" that will move the card element up or down.
     - pass in the card body element as a 
 6. in the changeItemOrder
@@ -106,4 +106,45 @@ const addReaditItem = (url, name) => {
 
   // Append the card to the list
   allItems.appendChild(card);
+};
+
+allItems.addEventListener("click", (event) => {
+  let element = event.target;
+
+  if (element.classList.contains("vote-up")) {
+    // TODO: upvote the card
+    voteUp(element);
+  } else if (element.classList.contains("vote-down")) {
+    // TODO: downvote the card
+    voteDown(element);
+  }
+});
+
+const voteUp = (buttonElement) => {
+  // Select the card body element
+  let cardBody = buttonElement.parentNode;
+  // Using that select the score element
+  let scoreElement = cardBody.children[1];
+  // OPTION 2:
+  //   let scoreElement = buttonElement.nextElementSibling;
+
+  // Change the score
+  changeScore(scoreElement, 1);
+};
+
+const voteDown = (buttonElement) => {
+  // Select the card body element
+  let cardBody = buttonElement.parentNode;
+  // Using that select the score element
+  let scoreElement = cardBody.children[1];
+  // OPTION 2:
+  //   let scoreElement = buttonElement.previousElementSibling;
+
+  // Change the score
+  changeScore(scoreElement, -1);
+};
+
+const changeScore = (scoreEl, difference) => {
+  let currScore = parseInt(scoreEl.textContent);
+  scoreEl.textContent = currScore + difference;
 };
