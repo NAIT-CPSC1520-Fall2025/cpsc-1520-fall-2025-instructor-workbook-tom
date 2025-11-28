@@ -183,6 +183,23 @@ const swapItemsIfNecessary = (topCardEl, bottomCardEl) => {
     let cardListElement = topCardEl.parentNode;
 
     cardListElement.insertBefore(bottomCardEl, topCardEl);
+
+    upAnimation(bottomCardEl);
+    downAnimation(topCardEl);
   }
   // If less than or equal do nothing
+};
+
+const upAnimation = (element) => {
+  element.classList.add("up-fade");
+  setTimeout(() => {
+    element.classList.remove("up-fade");
+  }, 1000);
+};
+
+const downAnimation = (element) => {
+  element.classList.add("down-fade");
+  setTimeout(() => {
+    element.classList.remove("down-fade");
+  }, 1000);
 };
