@@ -55,6 +55,7 @@ Ranking Piece
 */
 
 let readitForm = document.querySelector("#add-readit-item");
+let allItems = document.querySelector(".readit-items");
 
 readitForm.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -85,9 +86,24 @@ const addReaditItem = (url, name) => {
   downBtn.classList.add("btn", "vote-down", "m-1", "btn-secondary");
   downBtn.textContent = "Down";
 
-  // TODO: Finish creating all the content that this component needs
+  // Create the score
+  let score = document.createElement("p");
+  score.classList.add("score", "h4", "m-2");
+  score.textContent = "0";
 
-  // TODO: Add the content to the card in the correct order
+  // Create the link
+  let newLink = document.createElement("a");
+  newLink.classList.add("h4", "m-2");
+  newLink.setAttribute("href", url);
+  newLink.textContent = name;
 
-  // TODO: Append the card to the list
+  // Add the content to the card in the correct order
+  card.appendChild(body);
+  body.appendChild(upBtn);
+  body.appendChild(score);
+  body.appendChild(downBtn);
+  body.appendChild(newLink);
+
+  // Append the card to the list
+  allItems.appendChild(card);
 };
