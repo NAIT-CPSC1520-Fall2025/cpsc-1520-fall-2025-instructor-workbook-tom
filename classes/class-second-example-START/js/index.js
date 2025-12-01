@@ -19,5 +19,24 @@ import "../css/main.css";
 
 import { Balloon } from "./utils/balloon";
 
-let balloon = new Balloon();
-balloon.addToElement(document.querySelector(".balloons"));
+// Use a loop to spawn balloons
+for (let i = 0; i < 20; i++) {
+  // pass in the score
+  let newBalloon = new Balloon();
+  newBalloon.addToElement(document.querySelector(".balloons"));
+}
+
+// Add a remove listener
+document.addEventListener("click", (event) => {
+  if (event.target.classList.contains("single-balloon")) {
+    event.target.remove();
+    // read the score from the element attribute
+    // increment total score
+    // spawn new balloon
+  }
+});
+
+// Add a score tracker
+// Make each balloon worth some score and display that on the balloon in some way
+// When you click a balloon add it's score to a total that you display
+// Popping a balloon should spawn a new balloon

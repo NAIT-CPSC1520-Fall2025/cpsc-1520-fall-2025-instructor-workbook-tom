@@ -4,10 +4,17 @@
 import image from "url:../../img/balloon.gif";
 
 class Balloon {
+  MAX_STARTING_HEIGHT = 200;
+  MAX_STARTING_WIDTH = 1500;
   // This is called when you instantiate a new balloon
   constructor() {
+    // Add a score to the constructor
+    // save that score as a variable
     // Create a reference to the HTML element
     this.element = this.createBalloon();
+
+    // add the score as an attribute to the element
+    this.floatUp();
   }
 
   // Make a helper function that creates a new balloon element
@@ -21,8 +28,8 @@ class Balloon {
     // Change the image src
     balloonElement.setAttribute("src", image);
 
-    this.leftMargin = 600;
-    this.bottomMargin = 500;
+    this.leftMargin = Math.floor(Math.random() * this.MAX_STARTING_WIDTH);
+    this.bottomMargin = Math.floor(Math.random() * this.MAX_STARTING_HEIGHT);
 
     this.setStyleAndPosition(balloonElement);
 
@@ -46,6 +53,13 @@ class Balloon {
   }
 
   // Create a function to make the balloon float
+  floatUp() {
+    // Once this function is called it should start the balloon floating
+    setInterval(() => {
+      this.bottomMargin += 0.2;
+      this.setStyleAndPosition(this.element);
+    }, 10);
+  }
 }
 
 export { Balloon };
