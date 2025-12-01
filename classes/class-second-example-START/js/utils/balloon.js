@@ -21,12 +21,28 @@ class Balloon {
     // Change the image src
     balloonElement.setAttribute("src", image);
 
+    this.leftMargin = 600;
+    this.bottomMargin = 500;
+
+    this.setStyleAndPosition(balloonElement);
+
     return balloonElement;
   }
 
   // Create a function to add the balloon to the page
   addToElement(containerElement) {
     containerElement.appendChild(this.element);
+  }
+
+  // Create a function that styles and positions the balloon as needed
+  setStyleAndPosition(element) {
+    element.style = `
+        max-height: 200px;
+        max-width: 200px;
+        position: absolute;
+        bottom: ${this.bottomMargin}px;
+        left: ${this.leftMargin}px;
+    `;
   }
 
   // Create a function to make the balloon float
