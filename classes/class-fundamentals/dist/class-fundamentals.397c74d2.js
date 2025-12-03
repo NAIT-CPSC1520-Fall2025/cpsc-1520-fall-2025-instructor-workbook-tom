@@ -750,38 +750,159 @@ as an object.
 10. Add the necessary statement to create a new Card when the form is submitted.
 */ // import our bootstrap css
 var _bootstrapMinCss = require("bootstrap/dist/css/bootstrap.min.css");
+var _cardJs = require("./utils/card.js");
 // render the following stickies as Cards
 const stickies = [
     {
-        title: 'learn classes',
-        description: 'learn how the behaviour works'
+        title: "learn classes",
+        description: "learn how the behaviour works"
     },
     {
-        title: 'understand objects',
-        description: 'know the difference between '
+        title: "understand objects",
+        description: "know the difference between "
     },
     {
-        title: 'see how this is handy!',
-        description: 'we can reuse this code and it\'s all in its\' own file which is really nice'
+        title: "see how this is handy!",
+        description: "we can reuse this code and it's all in its' own file which is really nice"
     },
     {
-        title: 'just another sticky piece.',
-        description: 'just an extra that we can see here.'
+        title: "just another sticky piece.",
+        description: "just an extra that we can see here."
     }
 ];
 stickies.forEach((stickyDetail)=>{
-// create new cards
+    // create new cards
+    new (0, _cardJs.Card)(stickyDetail);
 });
-const newTopicForm = document.querySelector('#new-topic-form');
-newTopicForm.addEventListener('submit', (event)=>{
+const newTopicForm = document.querySelector("#new-topic-form");
+newTopicForm.addEventListener("submit", (event)=>{
     event.preventDefault();
-    const titleElement = event.target.elements['title'];
-    const descriptionElement = event.target.elements['description'];
+    const titleElement = event.target.elements["title"];
+    const descriptionElement = event.target.elements["description"];
     // create new card here
-    titleElement.value = '';
-    descriptionElement.value = '';
+    new (0, _cardJs.Card)({
+        title: titleElement.value,
+        description: descriptionElement.value
+    });
+    titleElement.value = "";
+    descriptionElement.value = "";
 });
 
-},{"bootstrap/dist/css/bootstrap.min.css":"i5LP7"}],"i5LP7":[function() {},{}]},["MAtcu","agb61"], "agb61", "parcelRequire0fc1", {})
+},{"bootstrap/dist/css/bootstrap.min.css":"i5LP7","./utils/card.js":"gQ77l"}],"i5LP7":[function() {},{}],"gQ77l":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Card", ()=>Card);
+var _cardJs = require("../dom/card.js");
+class Card {
+    constructor({ title, description }){
+        this.element = (0, _cardJs.createCardElement)({
+            title: title,
+            description: description
+        });
+        this.toLearnListElement = document.querySelector(".to-learn-stickies");
+        this.understoodListElement = document.querySelector(".understood-stickies");
+        this.render();
+        this.bindEventListeners();
+    }
+    render() {
+        this.toLearnListElement.appendChild(this.element);
+    }
+    remove() {
+        this.element.remove();
+    }
+    moveToTop() {
+        this.toLearnListElement.insertBefore(this.element, this.toLearnListElement.firstElementChild);
+    }
+    moveToUnderstood() {
+        this.understoodListElement.appendChild(this.element);
+        // TODO: remove the understood button
+        this.element.children[0].children[4].remove();
+        this.element.children[0].children[3].remove();
+    }
+    bindEventListeners() {
+        let cardBody = this.element.children[0];
+        // Select the remove button and add the correct listener
+        let removeButton = cardBody.children[2];
+        removeButton.addEventListener("click", ()=>{
+            this.remove();
+        });
+        // Select the priority button and add the correct listener
+        let topPriorityButton = cardBody.children[3];
+        topPriorityButton.addEventListener("click", ()=>{
+            this.moveToTop();
+        });
+        // Select the understood button and add the correct listener
+        let understoodButton = cardBody.children[4];
+        understoodButton.addEventListener("click", ()=>{
+            this.moveToUnderstood();
+        });
+    }
+}
+
+},{"../dom/card.js":"7j8gZ","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"7j8gZ":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "createCardElement", ()=>createCardElement);
+const createCardElement = ({ title, description })=>{
+    const card = document.createElement("div");
+    card.classList.add("card", "m-3");
+    card.setAttribute("style", "width: 18rem;");
+    const cardBody = document.createElement("div");
+    cardBody.classList.add("card-body");
+    const titleElement = document.createElement("h5");
+    titleElement.classList.add("card-title");
+    titleElement.textContent = title;
+    const descriptionElement = document.createElement("p");
+    descriptionElement.classList.add("card-text");
+    descriptionElement.textContent = description;
+    const removeButton = document.createElement("button");
+    removeButton.classList.add("btn", "btn-danger", "m-1");
+    removeButton.textContent = "remove";
+    const moveToTopButton = document.createElement("button");
+    moveToTopButton.classList.add("btn", "btn-primary", "m-1");
+    moveToTopButton.textContent = "top priority";
+    const moveToUnderstooButton = document.createElement("button");
+    moveToUnderstooButton.classList.add("btn", "btn-success", "m-1");
+    moveToUnderstooButton.textContent = "I get this.";
+    card.append(cardBody);
+    cardBody.append(titleElement);
+    cardBody.append(descriptionElement);
+    cardBody.append(removeButton);
+    cardBody.append(moveToTopButton);
+    cardBody.append(moveToUnderstooButton);
+    return card;
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"jnFvT":[function(require,module,exports,__globalThis) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, '__esModule', {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === 'default' || key === '__esModule' || Object.prototype.hasOwnProperty.call(dest, key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}]},["MAtcu","agb61"], "agb61", "parcelRequire0fc1", {})
 
 //# sourceMappingURL=class-fundamentals.397c74d2.js.map
