@@ -1,7 +1,7 @@
 // create a balloon class that
 // will create a balloon that is going to float up.
 
-import image from "url:../../img/balloon.gif";
+import image from "../../img/balloon.gif";
 
 class Balloon {
   MAX_STARTING_HEIGHT = 200;
@@ -18,9 +18,12 @@ class Balloon {
   }
 
   // Make a helper function that creates a new balloon element
+  // pass in the score here
   createBalloon() {
     // Create the element
     let balloonElement = document.createElement("img");
+
+    // add a score element that displays the score
 
     // Add the class
     balloonElement.classList.add("single-balloon");

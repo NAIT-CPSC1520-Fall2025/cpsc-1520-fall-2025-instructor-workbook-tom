@@ -4,13 +4,13 @@
   "description": "",
   "source": "index.html",
   "scripts": {
-    "start": "parcel",
-    "build": "parcel build"
+    "start": "vite",
+    "build": "vite build"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "parcel": "^2.3.2"
+    "vite": "^7.2.7"
   },
   "dependencies": {
     "bootstrap": "^5.1.3"
